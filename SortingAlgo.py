@@ -24,3 +24,11 @@ def MainMenu():
 Option = 0
 while True:
     MainMenu()
+    if Option == 1:
+        UserInput = SelectionSorting()
+    if Option == 2:
+        UserInput = BubbleSorting()
+    if Option == 3:
+        UserInput = InsertionSorting()
+    if Option == 4:
+        UserInput = MergeSorting()
