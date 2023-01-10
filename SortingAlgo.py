@@ -1,5 +1,4 @@
 # SORTING ALGORITHM
-# Merge Sorting
 
 import sys
 
@@ -19,63 +18,67 @@ def MainMenu():
     UserInput = int(input("\n      Select an option: "))
     print("-------------------------------------")
 
-# To call the options the user chooses
-Option = 0
-while True:
-    MainMenu()
-    if Option == 1:
-        UserInput = SelectionSorting()
-    if Option == 2:
-        UserInput = BubbleSorting()
-    if Option == 3:
-        UserInput = InsertionSorting()
-    if Option == 4:
-        UserInput = MergeSorting()
 
-    # Selection Sorting --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    def SelectionSorting(Items):
-        
-        # If statements for the variable "Mode"
-        if Mode == 3:
-            for n in range(Size):
-                Elements.append(str(input(f"Enter your {Size} {Type} now (END EACH BY ENTER KEY) => ")))
-                Order = 1
-        if Mode == 1:
-            for n in range(Size):
-                Elements.append(int(input(f"Enter your {Size} {Type} now (END EACH BY ENTER KEY) => ")))
-                Order = 1
-        if Mode == 2:
-            for n in range(Size):
-                Elements.append(int(input(f"Enter your {Size} {Type} now (END EACH BY ENTER KEY) => ")))
-                Order = 0
-        
-            Len = len(Items)
-            for x in range(Len - 1): 
-                MinVal = x
 
-                # Ascending / Alphabetical
-                if Order == 1:
-                    for y in range(x, Len):
-                        if Items[y] < Items[MinVal] :
-                            MinVal = y
-                    
-                # Descending
-                elif Order == 0:
-                    for y in range(x, Len):
-                        if Items[y] > Items[MinVal] :
-                            MinVal = y
+# Selection Sorting --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+def SelectionSorting(Items):
 
-                if MinVal != x :
-                    New = Items[x]
-                    Items[x] = Items[MinVal]
-                    Items[MinVal] = New
-                    print(f"PASS {x+1}: {Elements}")
-            
-            return Items
-    
+# If statements for the variable "Mode"
+# Alphabetical
+    if Mode == 3:
+        for n in range(Size):
+            Elements.append(str(input(f"Enter your {Size} {Type} now (END EACH BY ENTER KEY) => ")))
+        Len = len(Items)    
+        for x in range(Len - 1): 
+            MinVal = x
+            for y in range(x, Len):
+                if Items[y] < Items[MinVal] :
+                    MinVal = y
+            if MinVal != x :
+                New = Items[x]
+                Items[x] = Items[MinVal]
+                Items[MinVal] = New
+            print(f"PASS {x+1}: {Elements}")
+        return Items
+
+    # Ascending
+    if Mode == 1:
+        for n in range(Size):
+            Elements.append(int(input(f"Enter your {Size} {Type} now (END EACH BY ENTER KEY) => ")))
+        Len = len(Items)    
+        for x in range(Len - 1): 
+            MinVal = x
+            for y in range(x, Len):
+                if Items[y] < Items[MinVal] :
+                    MinVal = y
+            if MinVal != x :
+                New = Items[x]
+                Items[x] = Items[MinVal]
+                Items[MinVal] = New
+            print(f"PASS {x+1}: {Elements}")
+        return Items
+
+    # Descending
+    if Mode == 2:
+        for n in range(Size):
+            Elements.append(int(input(f"Enter your {Size} {Type} now (END EACH BY ENTER KEY) => ")))
+        Len = len(Items)    
+        for x in range(Len - 1): 
+            MinVal = x
+            for y in range(x, Len):
+                if Items[y] > Items[MinVal] :
+                    MinVal = y
+            if MinVal != x :
+                New = Items[x]
+                Items[x] = Items[MinVal]
+                Items[MinVal] = New
+            print(f"PASS {x+1}: {Elements}")
+        return Items
+
     # Part of the menu after you choose a sort algorithm
     # Creating List and the user input
     Elements = []
+    print("SELECTION SORTING")
     Size = int(input("How many elements are there on your list? "))
     Mode = int(input("[1]ASCENDING [2]DESCENDING [3]ALPHABETICALLY => "))
     Type = int(input("[1]INTEGERS [2]LETTERS (Upper-case only) => "))
@@ -99,64 +102,80 @@ while True:
         print("Thank you for use the SORTING ALGORITHM APPLICATION")
         exit()
 
-    # Bubble Sorting ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    def BubbleSorting(Items):
+# Bubble Sorting ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+def BubbleSorting(Items):
 
-        # If statements for the variable "Mode"
-        # Alphabetical
-        if Mode == 3:
-            for n in range(Size):
-                Elements.append(str(input(f"Enter your {Size} {Type} now (END EACH BY ENTER KEY) => ")))
-                Len = len(Items)
+    # If statements for the variable "Mode"
+    # Alphabetical
+    if Mode == 3:
+        for n in range(Size):
+            Elements.append(str(input(f"Enter your {Size} {Type} now (END EACH BY ENTER KEY) => ")))
+        Len = len(Items)
 
-            for x in range(Len - 1) :
+        for x in range(Len):
+            Sorted = True
+            
+            for y in range(Len - x - 1):
+                if Items[y] > Items[y + 1]:
 
-                for y in range(Len - 1) :
-                    if Items[y] > Items[y + 1]:
-                        New = Items[y]
-                        Items[y] = Items[y + 1]
-                        Items[y + 1] = New
-                        print(f"PASS {x+1}: {Elements}")        
+                    Items[y], Items[y + 1] = Items[y + 1], Items[y]
 
-            return Items
+                    Sorted = False
+                    print(f"{x + 1}, {Items}")    
 
-        # Ascending
-        if Mode == 1:
-            for n in range(Size):
-                Elements.append(int(input(f"Enter your {Size} {Type} now (END EACH BY ENTER KEY) => ")))
-                Len = len(Items)
+            if Sorted:
+                break
 
-            for x in range(Len - 1) :
+        return Items
 
-                for y in range(Len - 1) :
-                    if Items[y] > Items[y + 1]:
-                        New = Items[y]
-                        Items[y] = Items[y + 1]
-                        Items[y + 1] = New
-                        print(f"PASS {x+1}: {Elements}")        
+    # Ascending
+    if Mode == 1:
+        for n in range(Size):
+            Elements.append(int(input(f"Enter your {Size} {Type} now (END EACH BY ENTER KEY) => ")))
+        Len = len(Items)
 
-            return Items
+        for x in range(Len):
+            Sorted = True
+            
+            for y in range(Len - x - 1):
+                if Items[y] > Items[y + 1]:
 
-        # Descending
-        if Mode == 2:
-            for n in range(Size):
-                Elements.append(int(input(f"Enter your {Size} {Type} now (END EACH BY ENTER KEY) => ")))
-                Len = len(Items)
+                    Items[y], Items[y + 1] = Items[y + 1], Items[y]
 
-            for x in range(Len - 1) :
+                    Sorted = False
+                    print(f"{x + 1}, {Items}")    
 
-                for y in range(Len - 1) :
-                    if Items[y] < Items[y + 1]:
-                        New = Items[y]
-                        Items[y] = Items[y + 1]
-                        Items[y + 1] = New
-                        print(f"PASS {x+1}: {Elements}")        
+            if Sorted:
+                break
 
-            return Items
+        return Items
+
+    # Descending
+    if Mode == 2:
+        for n in range(Size):
+            Elements.append(int(input(f"Enter your {Size} {Type} now (END EACH BY ENTER KEY) => ")))
+        Len = len(Items)
+
+        for x in range(Len):
+            Sorted = True
+            
+            for y in range(Len - x - 1):
+                if Items[y] < Items[y + 1]:
+
+                    Items[y], Items[y + 1] = Items[y + 1], Items[y]
+
+                    Sorted = False
+                    print(f"{x + 1}, {Items}")    
+
+            if Sorted:
+                break
+
+        return Items
 
     # Part of the menu after you choose a sort algorithm
     # Creating List and the user input
     Elements = []
+    print("BUBBLE SORTING")
     Size = int(input("How many elements are there on your list? "))
     Mode = int(input("[1]ASCENDING [2]DESCENDING [3]ALPHABETICALLY => "))
     Type = int(input("[1]INTEGERS [2]LETTERS (Upper-case only) => "))
@@ -168,7 +187,7 @@ while True:
         Type = str("LETTERS")
     else:
         print("Invalid Input")
-    
+
     # The final sorted output
     print(f"FINAL BUBBLE SORTED ELEMENTS => {BubbleSorting(Elements)}")
 
@@ -179,71 +198,72 @@ while True:
     elif Exit == 'n':
         print("Thank you for using the SORTING ALGORITHM APPLICATION")
         exit()
+            
+# Insertion Sorting -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+def InsertionSorting(Items):
+    
+    # If statements for the variable "Mode"
+    # Aplabetical
+    if Mode == 3:
+            for n in range(Size):
+                Elements.append(str(input(f"Enter your {Size} {Type} now (END EACH BY ENTER KEY) => ")))
+
+                Len = len(Items)
+            for x in range(1, Len):
                 
-    # Insertion Sorting -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    def InsertionSorting(Items):
-        
-        # If statements for the variable "Mode"
-        # Aplabetical
-        if Mode == 3:
-                for n in range(Size):
-                    Elements.append(str(input(f"Enter your {Size} {Type} now (END EACH BY ENTER KEY) => ")))
+                New = Items[x]
+                
+                y = x - 1
+                while y >= 0 and New < Items[y] :
+                        Items[y+1] = Items[y]
+                        y -= 1
+                
+                Items[y+1] = New
+                print(f"PASS {x}: {Items}")
+            return Items  
 
-                    Len = len(Items)
-                for x in range(1, Len):
-                    
-                    New = Items[x]
-                    
-                    y = x - 1
-                    while y >= 0 and New < Items[y] :
-                            Items[y+1] = Items[y]
-                            y -= 1
-                    
-                    Items[y+1] = New
-                    print(f"PASS {x}: {Items}")
-                return Items  
+    # Ascending
+    if Mode == 1:
+            for n in range(Size):
+                Elements.append(int(input(f"Enter your {Size} {Type} now (END EACH BY ENTER KEY) => ")))
 
-        # Ascending
-        if Mode == 1:
-                for n in range(Size):
-                    Elements.append(int(input(f"Enter your {Size} {Type} now (END EACH BY ENTER KEY) => ")))
+                Len = len(Items)
+            for x in range(1, Len):
+                
+                New = Items[x]
+                
+                y = x - 1
+                while y >= 0 and New < Items[y] :
+                        Items[y+1] = Items[y]
+                        y -= 1
+                
+                Items[y+1] = New
+                print(f"PASS {x}: {Items}")
+            return Items
 
-                    Len = len(Items)
-                for x in range(1, Len):
-                    
-                    New = Items[x]
-                    
-                    y = x - 1
-                    while y >= 0 and New < Items[y] :
-                            Items[y+1] = Items[y]
-                            y -= 1
-                    
-                    Items[y+1] = New
-                    print(f"PASS {x}: {Items}")
-                return Items
+    # Descending
+    if Mode == 2:
+            for n in range(Size):
+                Elements.append(int(input(f"Enter your {Size} {Type} now (END EACH BY ENTER KEY) => ")))
 
-        # Descending
-        if Mode == 2:
-                for n in range(Size):
-                    Elements.append(int(input(f"Enter your {Size} {Type} now (END EACH BY ENTER KEY) => ")))
-
-                    Len = len(Items)
-                for x in range(1, Len):
-                    
-                    New = Items[x]
-                    
-                    y = x - 1
-                    while y >= 0 and New > Items[y] :
-                            Items[y+1] = Items[y]
-                            y -= 1
-                    
-                    Items[y+1] = New
-                    print(f"PASS {x}: {Items}")
-                return Items                 
-        
+                Len = len(Items)
+            for x in range(1, Len):
+                
+                New = Items[x]
+                
+                y = x - 1
+                while y >= 0 and New > Items[y] :
+                        Items[y+1] = Items[y]
+                        y -= 1
+                
+                Items[y+1] = New
+                print(f"PASS {x}: {Items}")
+            return Items                 
+    
     # Part of the menu after you choose a sort algorithm
     # Creating List and the user input
     Elements = []
+    print("INSERTION SORTING")
     Size = int(input("How many elements are there on your list? "))
     Mode = int(input("[1]ASCENDING [2]DESCENDING [3]ALPHABETICALLY => "))
     Type = int(input("[1]INTEGERS [2]LETTERS (Upper-case only) => "))
@@ -266,3 +286,109 @@ while True:
     elif Exit == 'n':
         print("Thank you for using the SORTING ALGORITHM APPLICATION")
         exit()
+
+    # Merge Sorting -----------------------------------------------------------------------------------------------------------------------------------------------------
+def MergeSorting(Items):
+    Len = len(Items)
+    if Len > 1:
+        Midpoint = Len // 2
+        Left = Items[:Midpoint]
+        Right = Items[Midpoint:]
+
+        MergeSorting(Left)
+        MergeSorting(Right)
+        
+        # Iterators
+        x = 0
+        y = 0
+        z = 0
+
+        LeftLen = len(Left)
+        RightLen = len(Right)
+        while x < LeftLen and y < RightLen:
+            if Left[x] < Right[y]:
+                Items[z] = Left[x]
+                x += 1
+            else:
+                Items[z] = Right[y]
+                y += 1
+            
+            z += 1
+        
+        while x < LeftLen:
+            Items[z] = Left[x]
+            x += 1
+            z += 1
+        while y < RightLen:
+            Items[z]=Right[y]
+            y += 1
+            z += 1
+        
+        print(f"Right: {Right} - Left: {Left} => Merge Sorting: {Items}")
+
+    # Part of the menu after you choose a sort algorithm
+    # Creating List and the user input
+    Elements = []
+    print("MERGE SORTING")
+    Size = int(input("How many elements are there on your list? "))
+    Mode = int(input("[1]ASCENDING [2]DESCENDING [3]ALPHABETICALLY => "))
+    Type = int(input("[1]INTEGERS [2]LETTERS (Upper-case only) => "))
+    # If statements for the variable "Type"
+    if Type == 1:
+        Type = str("INTEGERS")
+    elif Type == 2:
+        Type = str("LETTERS")
+    else:
+        print("Invalid Input")
+
+    # If statements for the variable "Mode"
+    # Alphabetical
+    if Mode == 3:
+        for n in range(Size):
+            Elements.append(str(input(f"Enter your {Size} {Type} now (END EACH BY ENTER KEY) => ")))
+            Order = 1 
+
+    # Ascending
+    if Mode == 1:
+        for n in range(Size):
+            Elements.append(int(input(f"Enter your {Size} {Type} now (END EACH BY ENTER KEY) => ")))
+            Order = 1 
+
+    # Descending
+    if Mode == 2:
+        for n in range(Size):
+            Elements.append(int(input(f"Enter your {Size} {Type} now (END EACH BY ENTER KEY) => ")))
+            Order = 2 
+
+    # Call the function
+    MergeSorting(Elements)
+
+    # The final sorted output if ascending/alphabetical or descending order
+    if Order == 1:
+        Elements.sort()
+        print(f"FINAL MERGE SORTED ELEMENTS => {Elements}")
+
+    if Order == 2:
+        Elements.sort(reverse = True)
+        print(f"FINAL MERGE SORTED ELEMENTS => {Elements}")
+
+    # Options to exit or continue
+    Exit = input("Do you want to try again? [y/n]")
+    if Exit == 'y':
+        MainMenu()
+    elif Exit == 'n':
+        print("Thank you for using the SORTING ALGORITHM APPLICATION")
+        exit()
+
+# To call the options the user chooses
+Option = 0
+while True:
+    MainMenu()
+    if Option == 1:
+        UserInput = SelectionSorting()
+    if Option == 2:
+        UserInput = BubbleSorting()
+    if Option == 3:
+        UserInput = InsertionSorting()
+    if Option == 4:
+        UserInput = MergeSorting()
